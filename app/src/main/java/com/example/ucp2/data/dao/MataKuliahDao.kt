@@ -23,5 +23,5 @@ interface MataKuliahDao {
     suspend fun deleteMataKuliah (mataKuliah: MataKuliah)
 
     @Update
-    suspend fun updateMahasiswa(mataKuliah: MataKuliah)
+    suspend fun updateMataKuliah(mataKuliah: MataKuliah)
 }
