@@ -52,7 +52,7 @@ fun TampilDsnView(
     Scaffold (
         topBar = {
             customTopAppBar(
-                judul = "Daftar Mahasiswa",
+                judul = "Daftar Dosen",
                 showBackButton = false,
                 onBack = { },
             )
@@ -65,7 +65,7 @@ fun TampilDsnView(
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,
-                    contentDescription = "Tambah Mahasiswa",
+                    contentDescription = "Tambah Dosen",
                 )
             }
         }

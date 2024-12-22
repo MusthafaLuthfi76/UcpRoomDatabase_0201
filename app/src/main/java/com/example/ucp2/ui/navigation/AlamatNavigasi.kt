@@ -25,3 +25,15 @@ object DestinasiDetailMK : AlamatNavigasi{
     const val KODE = "kode"
     val routesWithArg = "$route/{$KODE}"
 }
+
+object DestinasiHomeScreen : AlamatNavigasi {
+    override val route = "homescreen"
+}
+
+object DestinasiHomeMK : AlamatNavigasi {
+    override val route = "homeMK"
+}
+
+object DestinasiInsertMK : AlamatNavigasi {
+    override val route = "insertMK"
+}

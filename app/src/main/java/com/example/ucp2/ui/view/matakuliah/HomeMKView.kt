@@ -46,7 +46,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun HomeMKView(
     viewModel: HomeMKViewModel = viewModel(factory = PenyediaViewModel.Factory),
-    onAddMhs: () -> Unit = { },
+    onAddMk: () -> Unit = { },
     onDetailClick: (String) -> Unit = { },
     modifier: Modifier = Modifier
 ) {
@@ -60,13 +60,13 @@ fun HomeMKView(
         },
         floatingActionButton = {
             FloatingActionButton(
-                onClick = onAddMhs,
+                onClick = onAddMk,
                 shape = MaterialTheme.shapes.medium,
                 modifier = Modifier.padding(16.dp)
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,
-                    contentDescription = "Tambah Mahasiswa",
+                    contentDescription = "Tambah Mata Kuliah",
                 )
             }
         }
