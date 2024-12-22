@@ -46,7 +46,7 @@ fun DetailDsnView(
     viewModel : DetailDsnViewModel = viewModel(factory = PenyediaViewModel.Factory),
     onBack: () -> Unit = { },
 
-){
+    ){
     Scaffold(
         topBar = {
             customTopAppBar(
