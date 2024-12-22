@@ -21,7 +21,7 @@ class HomeMKViewModel(
         .filterNotNull()
         .map {
             HomeUiStateMK(
-                listMhs = it.toList(),
+                listMk = it.toList(),
                 isLoading = false,
             )
         }
@@ -48,7 +48,7 @@ class HomeMKViewModel(
 }
 
 data class HomeUiStateMK(
-    val listMhs: List<MataKuliah> = listOf(),
+    val listMk: List<MataKuliah> = listOf(),
     val isLoading : Boolean = false,
     val isError: Boolean = false,
     val errorMessage: String = ""
