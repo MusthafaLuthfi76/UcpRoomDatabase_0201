@@ -14,8 +14,14 @@ object DestinasiDetail : AlamatNavigasi{
     val routesWithArg = "$route/{$NIDN}"
 }
 
-object DestinasiUpdate : AlamatNavigasi {
-    override val route = "update"
-    const val NIDN = "nidn"
-    val  routesWithArg = "$route/{$NIDN}"
+object DestinasiUpdateMK : AlamatNavigasi {
+    override val route = "updateMK"
+    const val KODE = "kode"
+    val  routesWithArg = "$route/{$KODE}"
+}
+
+object DestinasiDetailMK : AlamatNavigasi{
+    override val route = "detailMK"
+    const val KODE = "kode"
+    val routesWithArg = "$route/{$KODE}"
 }
