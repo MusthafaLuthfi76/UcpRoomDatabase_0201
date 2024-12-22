@@ -37,12 +37,13 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.ucp2.data.entity.Dosen
 import com.example.ucp2.ui.customwidget.customTopAppBar
+import com.example.ucp2.ui.viewmodel.PenyediaViewModel
 import com.example.ucp2.ui.viewmodel.dosen.HomeUiState
 import com.example.ucp2.ui.viewmodel.dosen.TampilDsnViewModel
 import kotlinx.coroutines.launch
 
 @Composable
-fun HomeDsnView(
+fun TampilDsnView(
     viewModel: TampilDsnViewModel = viewModel(factory = PenyediaViewModel.Factory),
     onAddDsn: () -> Unit = { },
     onDetailClick: (String) -> Unit = { },
@@ -71,7 +72,7 @@ fun HomeDsnView(
     ) { innerPadding ->
         val homeUiState by viewModel.homeUiState.collectAsState()
 
-        BodyHomeDsnView(
+        BodyTampilDsnView(
             homeUiState = homeUiState,
             onClick = {
                 onDetailClick(it)
@@ -83,7 +84,7 @@ fun HomeDsnView(
 }
 
 @Composable
-fun BodyHomeDsnView(
+fun BodyTampilDsnView(
     homeUiState: HomeUiState,
     onClick: (String) -> Unit = { },
     modifier: Modifier = Modifier
