@@ -1,74 +1,70 @@
 package com.example.ucp2.ui.viewmodel.dosen
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+
 import com.example.ucp2.data.dao.DosenDao
 import com.example.ucp2.data.entity.Dosen
+import com.example.ucp2.repository.RepositoryDsn
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class DosenViewModel(private val dosenDao: DosenDao) : ViewModel() {
+class DosenViewModel(private val repositoryDsn: RepositoryDsn) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(DosenUIState())
-    val uiState: StateFlow<DosenUIState> get() = _uiState
+    var uiState by mutableStateOf(DosenUIState())
 
     // Memperbarui state berdasarkan input pengguna
-    fun updateState(dosenEvent: DosenEvent) {
-        _uiState.value = _uiState.value.copy(
-            dosenEvent = dosenEvent
+    fun updateState(dosenEvent: DosenEvent){
+        uiState = uiState.copy(
+            dosenEvent = dosenEvent,
         )
     }
 
-    // Validasi input form
-    private fun validateFields(): Boolean {
-        val event = _uiState.value.dosenEvent
+    // Validasi data input pengguna
+    private fun validatefields(): Boolean {
+        val event = uiState.dosenEvent
         val errorState = DosenFormErrorState(
             nidn = if (event.nidn.isNotEmpty()) null else "NIDN tidak boleh kosong",
             nama = if (event.nama.isNotEmpty()) null else "Nama tidak boleh kosong",
-            jenisKelamin = if (event.jenisKelamin.isNotEmpty()) null else "Jenis Kelamin tidak boleh kosong"
+            jenisKelamin = if (event.jenisKelamin.isNotEmpty()) null else "Jenis Kelamin tidak boleh kosong",
         )
-        _uiState.value = _uiState.value.copy(isEntryValid = errorState)
+
+        uiState = uiState.copy(isEntryValid = errorState)
         return errorState.isValid()
     }
 
-    // Menyimpan data dosen
-    fun saveDosen() {
-        if (validateFields()) {
-            val currentEvent = _uiState.value.dosenEvent
+    fun saveData() {
+        val currentEvent = uiState.dosenEvent
+        if (validatefields()) {
             viewModelScope.launch {
                 try {
-                    dosenDao.insertDosen(currentEvent.toDosenEntity())
-                    _uiState.value = _uiState.value.copy(
-                        snackBarMessage = "Dosen berhasil disimpan",
-                        dosenEvent = DosenEvent(), // Reset form
-                        isEntryValid = DosenFormErrorState() // Reset error state
+                    repositoryDsn.insertDsn(currentEvent.toDosenEntity())
+                    uiState = uiState.copy(
+                        snackBarMessage = "Data Berhasil Disimpan",
+                        dosenEvent = DosenEvent(), // Reset Input Form
+                        isEntryValid = DosenFormErrorState() // Reset Error state
                     )
-                } catch (e: Exception) {
-                    _uiState.value = _uiState.value.copy(
-                        snackBarMessage = "Gagal menyimpan dosen"
+                }
+                catch (e: Exception){
+                    uiState = uiState.copy(
+                        snackBarMessage = "Data Gagal Disimpan"
                     )
                 }
             }
         } else {
-            _uiState.value = _uiState.value.copy(
-                snackBarMessage = "Input tidak valid, periksa kembali"
+            uiState = uiState.copy(
+                snackBarMessage = "Input tidak Valid. Periksa kembali data anda"
             )
         }
     }
 
-    // Mendapatkan semua dosen
-    fun fetchDosenList() {
-        viewModelScope.launch {
-            dosenDao.getAllDosen().collect { dosenList ->
-                _uiState.value = _uiState.value.copy(dosenList = dosenList)
-            }
-        }
-    }
-
-    // Reset pesan snackbar
-    fun resetSnackBarMessage() {
-        _uiState.value = _uiState.value.copy(snackBarMessage = null)
+    //Reset pesan snackbar setelah ditampilkan
+    fun resetSnackBarMessage(){
+        uiState = uiState.copy(snackBarMessage = null)
     }
 }
 
