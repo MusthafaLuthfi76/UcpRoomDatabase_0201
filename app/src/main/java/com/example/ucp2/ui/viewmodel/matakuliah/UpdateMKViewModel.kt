@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
-class UpdateMhsViewModel(
+class UpdateMKViewModel(
     savedStateHandle: SavedStateHandle,
     private val repositoryMK: RepositoryMK
 ) : ViewModel() {

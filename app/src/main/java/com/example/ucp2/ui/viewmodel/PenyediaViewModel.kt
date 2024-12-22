@@ -9,6 +9,10 @@ import com.example.ucp2.KrsApp
 import com.example.ucp2.ui.viewmodel.dosen.DetailDsnViewModel
 import com.example.ucp2.ui.viewmodel.dosen.DosenViewModel
 import com.example.ucp2.ui.viewmodel.dosen.TampilDsnViewModel
+import com.example.ucp2.ui.viewmodel.matakuliah.DetailMKViewModel
+import com.example.ucp2.ui.viewmodel.matakuliah.HomeMKViewModel
+import com.example.ucp2.ui.viewmodel.matakuliah.MKViewModel
+import com.example.ucp2.ui.viewmodel.matakuliah.UpdateMKViewModel
 
 object PenyediaViewModel {
 
@@ -31,6 +35,33 @@ object PenyediaViewModel {
                 krsApp().containerApp.repositoryDsn,
             )
         }
+
+        initializer {
+            MKViewModel(
+                krsApp().containerApp.repositoryMK
+            )
+        }
+
+        initializer {
+            HomeMKViewModel(
+                krsApp().containerApp.repositoryMK
+            )
+        }
+
+        initializer {
+            DetailMKViewModel(
+                createSavedStateHandle(),
+                krsApp().containerApp.repositoryMK,
+            )
+        }
+
+        initializer {
+            UpdateMKViewModel(
+                createSavedStateHandle(),
+                krsApp().containerApp.repositoryMK,
+            )
+        }
+
     }
 }
 
