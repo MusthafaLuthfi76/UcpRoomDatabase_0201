@@ -24,3 +24,12 @@ Tampilan :
 ![image](https://github.com/user-attachments/assets/c4760f30-f3b9-4833-920a-0216741c0de4)
 
 ![image](https://github.com/user-attachments/assets/23d3e98d-57a7-452a-b1d6-4fa9ecc5efe8)
+
+![image](https://github.com/user-attachments/assets/498388e2-77ae-4ea3-aa84-cf66753fa144)
+
+![image](https://github.com/user-attachments/assets/ceb1ff9a-b26a-4479-a0e1-6c3549b52eaa)
+
+![image](https://github.com/user-attachments/assets/d1361a0b-2f02-4400-b122-5c797f359fc9)
+
+![image](https://github.com/user-attachments/assets/acce3e70-5617-40e9-a76b-8e4b77bc615d)
+
