@@ -33,3 +33,7 @@ Tampilan :
 
 ![image](https://github.com/user-attachments/assets/acce3e70-5617-40e9-a76b-8e4b77bc615d)
 
+![image](https://github.com/user-attachments/assets/50213813-afcd-48d6-801d-a9b6d6ec5a78)
+
+![image](https://github.com/user-attachments/assets/85f321c9-e42f-4243-9eb8-e4c394a698d4)
+
