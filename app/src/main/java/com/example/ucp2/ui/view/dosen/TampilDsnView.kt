@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -173,48 +174,42 @@ fun CardDsn (
     modifier: Modifier = Modifier,
     onClick: () -> Unit = { }
 ) {
-    Card (
+    Card(
         onClick = onClick,
         modifier = modifier
             .fillMaxWidth()
             .padding(8.dp)
-    ){
-        Column (
-            modifier = Modifier.padding(8.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Row (
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
-            ){
-                Icon(imageVector = Icons.Filled.Person, contentDescription = "")
-                Spacer(modifier = Modifier.padding(4.dp))
+            // Tambahkan icon di sisi kiri
+            Icon(
+                imageVector = Icons.Filled.Person,
+                contentDescription = "Dosen Icon",
+                modifier = Modifier
+                    .padding(end = 8.dp)
+                    .size(48.dp) // Ukuran ikon
+            )
+
+            Column(
+                modifier = Modifier.weight(1f) // Mengambil ruang sisa
+            ) {
                 Text(
                     text = dsn.nama,
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp
                 )
-            }
-            Row (
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
-            ){
-                Icon(imageVector = Icons.Filled.DateRange, contentDescription = "")
-                Spacer(modifier = Modifier.padding(4.dp))
                 Text(
-                    text = dsn.nidn,
-                    fontWeight = FontWeight.Bold,
+                    text = "NIDN: ${dsn.nidn}",
                     fontSize = 16.sp
                 )
-            }
-            Row (
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Icon(imageVector = Icons.Filled.Home, contentDescription = "")
-                Spacer(modifier = Modifier.padding(4.dp))
                 Text(
-                    text = dsn.jenisKelamin,
-                    fontWeight = FontWeight.Bold
+                    text = "Jenis Kelamin: ${dsn.jenisKelamin}",
+                    fontSize = 14.sp
                 )
             }
         }

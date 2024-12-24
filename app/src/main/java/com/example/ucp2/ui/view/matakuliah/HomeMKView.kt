@@ -6,13 +6,17 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
@@ -50,7 +54,7 @@ fun HomeMKView(
     onDetailClick: (String) -> Unit = { },
     modifier: Modifier = Modifier
 ) {
-    Scaffold (
+    Scaffold(
         topBar = {
             customTopAppBar(
                 judul = "Daftar Mata Kuliah",
@@ -62,11 +66,13 @@ fun HomeMKView(
             FloatingActionButton(
                 onClick = onAddMk,
                 shape = MaterialTheme.shapes.medium,
-                modifier = Modifier.padding(16.dp)
+                modifier = Modifier.padding(16.dp),
+                containerColor = MaterialTheme.colorScheme.primary
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,
                     contentDescription = "Tambah Mata Kuliah",
+                    tint = MaterialTheme.colorScheme.onPrimary
                 )
             }
         }
@@ -80,7 +86,6 @@ fun HomeMKView(
             },
             modifier = Modifier.padding(innerPadding)
         )
-
     }
 }
 
@@ -91,10 +96,10 @@ fun BodyHomeMKView(
     modifier: Modifier = Modifier
 ) {
     val coroutineScope = rememberCoroutineScope()
-    val snackbarHostState = remember { SnackbarHostState() } //Snackbar state
+    val snackbarHostState = remember { SnackbarHostState() }
+
     when {
         mkuiState.isLoading -> {
-            // Menampilkan indikator loading
             Box(
                 modifier = modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
@@ -104,18 +109,16 @@ fun BodyHomeMKView(
         }
 
         mkuiState.isError -> {
-            // Menampilkan pesan error
             LaunchedEffect(mkuiState.errorMessage) {
                 mkuiState.errorMessage?.let { message ->
                     coroutineScope.launch {
-                        snackbarHostState.showSnackbar(message)//Tampilkan snackbar
+                        snackbarHostState.showSnackbar(message)
                     }
                 }
             }
         }
 
         mkuiState.listMk.isEmpty() -> {
-            // Menampilkan pesan jika data kosong
             Box(
                 modifier = modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
@@ -130,20 +133,13 @@ fun BodyHomeMKView(
         }
 
         else -> {
-            //Menampilkan daftar mahasiswa
             ListMataKuliah(
                 listMK = mkuiState.listMk,
-                onClick = {
-                    onClick(it)
-                    println(
-                        it
-                    )
-                },
+                onClick = { onClick(it) },
                 modifier = modifier
             )
         }
     }
-
 }
 
 @Composable
@@ -152,18 +148,18 @@ fun ListMataKuliah(
     modifier: Modifier = Modifier,
     onClick: (String) -> Unit = { }
 ) {
-    LazyColumn (
+    LazyColumn(
         modifier = modifier
-    ){
-        items(
-            items = listMK,
-            itemContent = {mk ->
-                CardMK(
-                    mk = mk,
-                    onClick = {onClick(mk.kode)}
-                )
-            }
-        )
+    ) {
+        items(items = listMK) { mk ->
+            CardMK(
+                mk = mk,
+                onClick = { onClick(mk.kode) }
+            )
+            androidx.compose.material3.Divider(
+                modifier = Modifier.padding(horizontal = 8.dp)
+            )
+        }
     }
 }
 
@@ -174,48 +170,62 @@ fun CardMK (
     modifier: Modifier = Modifier,
     onClick: () -> Unit = { }
 ) {
-    Card (
+    Card(
         onClick = onClick,
         modifier = modifier
             .fillMaxWidth()
             .padding(8.dp)
-    ){
-        Column (
-            modifier = Modifier.padding(8.dp)
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp)
         ) {
-            Row (
+            Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
-            ){
-                Icon(imageVector = Icons.Filled.Person, contentDescription = "")
-                Spacer(modifier = Modifier.padding(4.dp))
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.Create,
+                    contentDescription = "Nama",
+                    tint = MaterialTheme.colorScheme.primary
+                )
+                Spacer(modifier = Modifier.width(8.dp))
                 Text(
                     text = mk.nama,
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp
                 )
             }
-            Row (
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
-            ){
-                Icon(imageVector = Icons.Filled.DateRange, contentDescription = "")
-                Spacer(modifier = Modifier.padding(4.dp))
-                Text(
-                    text = mk.kode,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 16.sp
-                )
-            }
-            Row (
+            Spacer(modifier = Modifier.height(4.dp))
+            Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Icon(imageVector = Icons.Filled.Home, contentDescription = "")
-                Spacer(modifier = Modifier.padding(4.dp))
+                Icon(
+                    imageVector = Icons.Filled.DateRange,
+                    contentDescription = "Kode Mata Kuliah",
+                    tint = MaterialTheme.colorScheme.primary
+                )
+                Spacer(modifier = Modifier.width(8.dp))
                 Text(
-                    text = mk.sks,
-                    fontWeight = FontWeight.Bold
+                    text = "Kode: ${mk.kode}",
+                    fontWeight = FontWeight.Medium,
+                    fontSize = 16.sp
+                )
+            }
+            Spacer(modifier = Modifier.height(4.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.Notifications,
+                    contentDescription = "SKS",
+                    tint = MaterialTheme.colorScheme.primary
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(
+                    text = "SKS: ${mk.sks}",
+                    fontWeight = FontWeight.Medium
                 )
             }
         }

@@ -153,7 +153,7 @@ fun FormDosen(
             value = dosenEvent.nidn, onValueChange = {
                 onValueChange(dosenEvent.copy(nidn = it))
             } ,
-            label = { Text("NIM") },
+            label = { Text("NIDN") },
             isError = errorState.nidn != null,
             placeholder = {Text("Masukkan NIDN")},
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
