@@ -5,12 +5,19 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.ucp2.data.database.UcpDatabase
 import com.example.ucp2.data.entity.MataKuliah
+import com.example.ucp2.repository.RepositoryDsn
 import com.example.ucp2.repository.RepositoryMK
+import com.example.ucp2.ui.viewmodel.dosen.DosenUIState
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 
-class MKViewModel(private val repositoryMK: RepositoryMK) : ViewModel(){
+class MKViewModel(
+    private val repositoryMK: RepositoryMK,
+) : ViewModel(){
 
     var uiState by mutableStateOf(MKUIState())
 

@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.ucp2.data.DosenDD
 import com.example.ucp2.ui.navigation.PengelolaHalaman
 import com.example.ucp2.ui.theme.UCP2Theme
 
@@ -27,6 +28,7 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+        DosenDD.loadData(this)
     }
 }
 

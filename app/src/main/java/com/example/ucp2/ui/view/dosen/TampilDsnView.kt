@@ -120,7 +120,7 @@ fun BodyTampilDsnView(
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "Tidak ada data Mahasiswa",
+                    text = "Tidak ada data Dosen",
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(16.dp)

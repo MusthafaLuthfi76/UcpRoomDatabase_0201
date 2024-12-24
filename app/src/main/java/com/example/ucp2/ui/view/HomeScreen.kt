@@ -1,5 +1,6 @@
 package com.example.ucp2.ui.view
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -7,15 +8,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.ucp2.R
 
 @Composable
 fun HomeScreen(
     navigateToDosen: () -> Unit, // Navigasi ke halaman Dosen
     navigateToMK: () -> Unit // Navigasi ke halaman Mata Kuliah
 ) {
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -26,9 +30,16 @@ fun HomeScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
+            Image(
+                painter = painterResource(
+                    id = R.drawable.images2
+                ),
+                contentDescription = "",
+                Modifier.size(175.dp)
+            )
             // Judul atau Header
             Text(
-                text = "Selamat Datang",
+                text = "UCP2 Aplikasi Mobile",
                 style = MaterialTheme.typography.headlineLarge.copy(
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.primary

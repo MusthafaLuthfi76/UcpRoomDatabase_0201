@@ -121,7 +121,7 @@ fun BodyHomeMKView(
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "Tidak ada data Mahasiswa",
+                    text = "Tidak ada data Mata Kuliah",
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(16.dp)
